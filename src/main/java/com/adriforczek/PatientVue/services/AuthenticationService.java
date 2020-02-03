@@ -37,5 +37,6 @@ public class AuthenticationService implements ApplicationListener<ContextRefresh
 
         AuthResponse response = restTemplate.postForObject("https://www.patientview.org/api/auth/login", request, AuthResponse.class, new HashMap<>());
         System.out.println(response.getToken());
+        String token = response.getToken();
     }
 }
