@@ -43,4 +43,24 @@ public class UserService {
         return user;
     }
 
+    public void getPatientFHIRData(String userId, String token) {
+        String url = "https://www.patientview.org/api/patient/{userId}/basic";
+
+        // create headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("X-Auth-Token", token);
+
+        // build request
+        HttpEntity request = new HttpEntity(headers);
+
+        ResponseEntity<User> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                User.class,
+                token
+        );
+    }
+
 }

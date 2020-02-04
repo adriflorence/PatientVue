@@ -1,28 +1,18 @@
 <template>
-  <div id="app">
-    <div class="personalDetails" v-if="this.personalDetails">
-         <h1>PatientVue</h1>
-          <section class="box">
-              {{ this.personalDetails.forename }}
-              {{ this.personalDetails.surname }}
-              {{ this.personalDetails.dateOfBirth }}
-          </section>
-          <section>
-            <label>Groups</label>
-                <p v-for="group in personalDetails.groupRoles"
-                :key="group.id">
-                    {{ group.group.name }}
-                </p>
-          </section>
-      </div>
-  </div>
+    <div id="app">
+        <Personal :personalDetails="personalDetails"/>
+    </div>
 </template>
 
 <script>
     import axios from 'axios';
+    import Personal from './components/Personal.vue';
 
     export default {
         name: 'app',
+        components: {
+            Personal
+        },
         data: function() {
             return {
                 personalDetails: null,
