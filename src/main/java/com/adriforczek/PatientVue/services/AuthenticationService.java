@@ -19,6 +19,12 @@ import java.util.Map;
 @Component
 public class AuthenticationService implements ApplicationListener<ContextRefreshedEvent> {
 
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
     @Autowired
     RestTemplate restTemplate;
 
@@ -37,6 +43,6 @@ public class AuthenticationService implements ApplicationListener<ContextRefresh
 
         AuthResponse response = restTemplate.postForObject("https://www.patientview.org/api/auth/login", request, AuthResponse.class, new HashMap<>());
         System.out.println(response.getToken());
-        String token = response.getToken();
+        token = response.getToken();
     }
 }

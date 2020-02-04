@@ -1,12 +1,25 @@
 package com.adriforczek.PatientVue.entities;
 
+import java.util.List;
+
 public class User {
 
+    private int id;
     private String username;
     private String forename;
     private String surname;
     private String dateOfBirth;
     private String email;
+    private String contactNumber;
+    private List<GroupRole> groupRoles;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -46,5 +59,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public List<GroupRole> getGroupRoles() {
+        return groupRoles;
+    }
+
+    public void setGroupRoles(List<GroupRole> groupRoles) {
+        this.groupRoles = groupRoles;
     }
 }

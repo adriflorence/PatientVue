@@ -1,7 +1,7 @@
 package com.adriforczek.PatientVue.services;
 
 import com.adriforczek.PatientVue.entities.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -13,9 +13,8 @@ public class UserService {
     @Autowired
     RestTemplate restTemplate;
 
-    public User getUserInformation(){
+    public User getUserInformation(String token) throws JsonProcessingException {
         String url = "https://www.patientview.org/api/auth/{token}/basicuserinformation";
-        String token = "***";
 
         // create headers
         HttpHeaders headers = new HttpHeaders();
@@ -36,12 +35,12 @@ public class UserService {
         // check response
         if (response.getStatusCode() == HttpStatus.OK) {
             System.out.println("Request Successful.");
-            System.out.println(response.getBody());
         } else {
             System.out.println("Request Failed");
-            System.out.println(response.getStatusCode());
         }
 
+        User user = response.getBody();
+        return user;
     }
 
 }
