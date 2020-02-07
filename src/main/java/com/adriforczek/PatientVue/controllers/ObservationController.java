@@ -1,29 +1,23 @@
 package com.adriforczek.PatientVue.controllers;
 
-import com.adriforczek.PatientVue.entities.Observation;
+import com.adriforczek.PatientVue.entities.ObservationDAO;
+import com.adriforczek.PatientVue.services.AuthenticationService;
 import com.adriforczek.PatientVue.services.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 public class ObservationController {
 
     @Autowired
+    AuthenticationService authService;
+
+    @Autowired
     ObservationService observationService;
 
     @GetMapping("/observations")
-    public List<Observation> getAllObservations() {
-        return observationService.getAllObservations();
-    }
-
-    @GetMapping("/observations/{code}")
-    public Observation getSingleObservation(@RequestParam String code){
-        return null;
+    public ObservationDAO getObservationData(@PathVariable String userId) {
+        return observationService.getObservationData(userId, authService.getToken());
     }
 }
