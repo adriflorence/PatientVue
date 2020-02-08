@@ -2,15 +2,25 @@ package com.adriforczek.PatientVue.entities;
 
 import java.util.List;
 
+// FHIR = Fast Healthcare Interoperability Resources
 public class FHIRData {
 
-    private List<FHIRCondition> conditions;
+    private int id;
+    private List<FHIRCondition> fhirConditions;
 
-    public List<FHIRCondition> getConditions() {
-        return conditions;
+    public int getId() {
+        return id;
     }
 
-    public void setConditions(List<FHIRCondition> conditions) {
-        this.conditions = conditions;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<FHIRCondition> getFhirConditions() {
+        return fhirConditions;
+    }
+
+    public void setFhirConditions(List<FHIRCondition> fhirConditions) {
+        this.fhirConditions = fhirConditions;
     }
 }

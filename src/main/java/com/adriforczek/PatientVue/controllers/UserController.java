@@ -1,11 +1,14 @@
 package com.adriforczek.PatientVue.controllers;
 
+import com.adriforczek.PatientVue.entities.FHIRData;
 import com.adriforczek.PatientVue.entities.User;
 import com.adriforczek.PatientVue.services.AuthenticationService;
 import com.adriforczek.PatientVue.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -23,11 +26,11 @@ public class UserController {
         return userService.getUserInformation(authService.getToken());
     }
 
-    // @RequestParams extract values from the query string
-    // @PathVariables extract values from the URI path
+    // Given a UserId, get basic patient information for a user
+    // from clinical data stored in FHIR database.
     @GetMapping("/patient/{userId}/basic")
     @ResponseBody
-    public void getPatientFHIRData(@PathVariable String userId) {
-        userService.getPatientFHIRData(userId, authService.getToken());
+    public List<FHIRData> getPatientFHIRData(@PathVariable String userId) {
+        return userService.getPatientFHIRData(userId, authService.getToken());
     }
 }

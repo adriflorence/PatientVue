@@ -1,11 +1,15 @@
 package com.adriforczek.PatientVue.services;
 
+import com.adriforczek.PatientVue.entities.FHIRData;
 import com.adriforczek.PatientVue.entities.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Component
 public class UserService {
@@ -25,11 +29,11 @@ public class UserService {
         HttpEntity request = new HttpEntity(headers);
 
         ResponseEntity<User> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                request,
-                User.class,
-                token
+            url,
+            HttpMethod.GET,
+            request,
+            User.class,
+            token
         );
 
         // check response
@@ -43,7 +47,7 @@ public class UserService {
         return user;
     }
 
-    public void getPatientFHIRData(String userId, String token) {
+    public List<FHIRData> getPatientFHIRData(String userId, String token) {
         String url = "https://www.patientview.org/api/patient/{userId}/basic";
 
         // create headers
@@ -54,13 +58,18 @@ public class UserService {
         // build request
         HttpEntity request = new HttpEntity(headers);
 
-        ResponseEntity<User> response = restTemplate.exchange(
+        ResponseEntity<List<FHIRData>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 request,
-                User.class,
-                token
+                // enables capturing and passing a generic Type
+                new ParameterizedTypeReference<List<FHIRData>>() {},
+                userId
         );
+
+        List<FHIRData> clinicalData =  response.getBody();
+        System.out.println(response.getBody().get(0).getFhirConditions());
+        return clinicalData;
     }
 
 }
