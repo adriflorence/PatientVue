@@ -36,7 +36,7 @@ build/
 ### Config ###
 /src/main/java/com/adriforczek/PatientVue/config
 
-
+/client/src/config
 
 # CLIENT #
 

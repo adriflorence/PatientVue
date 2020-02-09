@@ -6,6 +6,7 @@ public class Observation {
     private String applies;
     private String name;
     private String value;
+    private Group group;
 
     public String getId() {
         return id;
@@ -37,5 +38,13 @@ public class Observation {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

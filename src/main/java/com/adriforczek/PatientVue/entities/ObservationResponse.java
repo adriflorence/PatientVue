@@ -1,8 +1,6 @@
 package com.adriforczek.PatientVue.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

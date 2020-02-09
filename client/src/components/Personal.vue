@@ -20,10 +20,10 @@
 
           <p class="title">Groups</p>
           <div class="tile" v-if="personalDetails">
-              <p v-for="group in personalDetails.groupRoles"
+              <span class="tag is-info" v-for="group in personalDetails.groupRoles"
                 :key="group.id">
-                {{ group.group.name }}
-              </p>
+                {{ group.group.shortName }}
+              </span>
           </div>
       </div>
       <div class="tile is-parent">
@@ -40,7 +40,7 @@
 
 <script>
   export default {
-          name: 'Personal',
-          props: ['personalDetails'],
+      name: 'Personal',
+      props: ['personalDetails'],
   }
 </script>
