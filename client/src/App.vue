@@ -2,6 +2,15 @@
     <div id="app">
         <div class="container">
             <div class="notification">
+                <div class="tile is-parent">
+                    <article class="tile is-child notification is-success">
+                        <div class="content">
+                            <p class="title">
+                                PatientVue
+                            </p>
+                        </div>
+                    </article>
+                </div>
                 <Personal :personalDetails="personalDetails"/>
                 <div class="box">
 
