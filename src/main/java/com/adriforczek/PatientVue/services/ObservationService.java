@@ -1,14 +1,11 @@
 package com.adriforczek.PatientVue.services;
 
-import com.adriforczek.PatientVue.entities.Observation;
-import com.adriforczek.PatientVue.entities.ObservationDAO;
-import com.adriforczek.PatientVue.entities.User;
+import com.adriforczek.PatientVue.entities.ObservationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 
 @Component
 public class ObservationService {
@@ -16,12 +13,12 @@ public class ObservationService {
     @Autowired
     RestTemplate restTemplate;
 
-    public ObservationDAO getObservationData(String userId, String token){
+    public ObservationResponse getObservationData(String userId, String token){
         String url = "https://www.patientview.org/api/user/{userId}/observations?" +
              "code=Urea&" +
              "code=creatinine&" +
              "code=Potassium&" +
-             "code=Weight&" +
+//             "code=Weight&" +
              "code=Tacro&" +
              "&limit=10&offset=0&orderDirection=DESC?";
 
@@ -33,16 +30,17 @@ public class ObservationService {
         // build request
         HttpEntity request = new HttpEntity(headers);
 
-        ResponseEntity<ObservationDAO> response = restTemplate.exchange(
+        ResponseEntity<ObservationResponse> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 request,
-                ObservationDAO.class,
-                token
+                ObservationResponse.class,
+                userId
         );
 
+
         System.out.println(response.getBody());
-        ObservationDAO observations = response.getBody();
-        return observations;
+        ObservationResponse res = response.getBody();
+        return res;
     }
 }

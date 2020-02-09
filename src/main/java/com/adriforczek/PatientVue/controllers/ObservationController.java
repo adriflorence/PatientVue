@@ -1,6 +1,6 @@
 package com.adriforczek.PatientVue.controllers;
 
-import com.adriforczek.PatientVue.entities.ObservationDAO;
+import com.adriforczek.PatientVue.entities.ObservationResponse;
 import com.adriforczek.PatientVue.services.AuthenticationService;
 import com.adriforczek.PatientVue.services.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,11 @@ public class ObservationController {
     @Autowired
     ObservationService observationService;
 
-    @GetMapping("/observations")
-    public ObservationDAO getObservationData(@PathVariable String userId) {
+
+    // @RequestParams extract values from the query string
+    // @PathVariables extract values from the URI path
+    @GetMapping("/patient/{userId}/observations")
+    public ObservationResponse getObservationData(@PathVariable String userId) {
         return observationService.getObservationData(userId, authService.getToken());
     }
 }

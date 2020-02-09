@@ -1,7 +1,15 @@
 <template>
   <div class="container">
       <div class="notification">
-          <p class="title">PatientVue</p>
+          <div class="tile is-parent">
+              <article class="tile is-child notification is-success">
+                  <div class="content">
+                    <p class="title">
+                        PatientVue
+                    </p>
+                  </div>
+              </article>
+           </div>
           <div class="content" v-if="this.personalDetails">
               <div class="tile is-primary">
                 <p>{{ this.personalDetails.forename }} {{ this.personalDetails.surname }}</p>
@@ -21,7 +29,7 @@
       <div class="tile is-parent">
           <article class="tile is-child notification is-success">
               <div class="content">
-                  <p class="title">
+                  <p>
                       <a href="https://patientviewbasic.docs.apiary.io">PatientView</a>
                   </p>
               </div>
