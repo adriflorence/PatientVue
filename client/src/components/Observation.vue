@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    {{ this.observation.name }}
-    {{ this.observation.value }}
-  </div>
+    <div class="tile">
+        {{ this.observation.name }}
+        {{ this.observation.value }}
+    </div>
 </template>
 
 <script>

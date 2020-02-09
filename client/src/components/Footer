@@ -1,0 +1,17 @@
+<template>
+    <div class="tile is-parent">
+        <article class="tile is-child notification is-success">
+            <div class="content">
+                <p>
+                    <a href="https://patientviewbasic.docs.apiary.io">PatientView</a>
+                </p>
+            </div>
+        </article>
+  </div>
+<template>
+
+<script>
+  export default {
+      name: 'Footer',
+  }
+</script>

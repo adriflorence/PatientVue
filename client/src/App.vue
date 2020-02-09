@@ -1,15 +1,24 @@
 <template>
     <div id="app">
-        <Personal :personalDetails="personalDetails"/>
+        <div class="container">
+            <div class="notification">
+                <Personal :personalDetails="personalDetails"/>
+                <div class="box">
 
-        <Observation v-if="recentObservations && recentObservations.CREATININE"
-            :observation="recentObservations.CREATININE[0]"/>
+                    <Observation v-if="recentObservations && recentObservations.CREATININE"
+                        :observation="recentObservations.CREATININE[0]"/>
 
-        <Observation v-if="recentObservations && recentObservations.POTASSIUM"
-            :observation="recentObservations.POTASSIUM[0]"/>
+                    <Observation v-if="recentObservations && recentObservations.POTASSIUM"
+                        :observation="recentObservations.POTASSIUM[0]"/>
 
-        <Observation v-if="recentObservations && recentObservations.UREA"
-            :observation="recentObservations.UREA[0]"/>
+                    <Observation v-if="recentObservations && recentObservations.UREA"
+                        :observation="recentObservations.UREA[0]"/>
+
+                    <Observation v-if="recentObservations && recentObservations.WEIGHT"
+                        :observation="recentObservations.WEIGHT[0]"/>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -78,12 +87,12 @@
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
 </style>
