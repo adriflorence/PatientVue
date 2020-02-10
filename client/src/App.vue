@@ -2,8 +2,8 @@
     <div id="app">
         <div class="container">
             <div class="notification">
-                <div class="tile is-parent">
-                    <article class="tile is-child notification is-success">
+                <div class="tile">
+                    <article class="tile is-child notification is-info">
                         <div class="content">
                             <p class="title">
                                 PatientVue
@@ -13,7 +13,7 @@
                 </div>
                 <Personal :personalDetails="personalDetails"/>
                 <div class="box">
-
+                    <p class="title">Results</p>
                     <Observation v-if="recentObservations && recentObservations.CREATININE"
                         :observation="recentObservations.CREATININE[0]"/>
 
@@ -26,6 +26,7 @@
                     <Observation v-if="recentObservations && recentObservations.WEIGHT"
                         :observation="recentObservations.WEIGHT[0]"/>
                 </div>
+                <Footer/>
             </div>
         </div>
     </div>
@@ -36,12 +37,14 @@
     import Personal from './components/Personal.vue';
     import Observation from './components/Observation.vue';
     import Credentials from './config/Credentials.json';
+    import Footer from './components/Footer.vue';
 
     export default {
         name: 'app',
         components: {
             Personal,
-            Observation
+            Observation,
+            Footer
         },
         data: function() {
             return {
@@ -102,6 +105,5 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
-        margin-top: 60px;
     }
 </style>

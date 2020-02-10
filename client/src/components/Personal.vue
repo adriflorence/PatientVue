@@ -7,7 +7,6 @@
         </div>
 
         <div class="box" v-if="personalDetails">
-            <p class="title">Groups</p>
             <span class="tag is-info" v-for="group in personalDetails.groupRoles"
                 :key="group.id">
                 {{ group.group.shortName }}
