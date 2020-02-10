@@ -17,9 +17,9 @@ public class ObservationService {
         String url = "https://www.patientview.org/api/user/{userId}/observations?" +
              "code=Urea&" +
              "code=creatinine&" +
-             "code=Potassium&" +
-//             "code=Weight&" +
-             "code=Tacro&" +
+             "code=potassium&" +
+             "code=Weight&" +
+             "code=tacrolimus&" +
              "&limit=10&offset=0&orderDirection=DESC?";
 
         // create headers
@@ -37,8 +37,7 @@ public class ObservationService {
                 ObservationResponse.class,
                 userId
         );
-
-
+        
         System.out.println(response.getBody());
         ObservationResponse res = response.getBody();
         return res;
