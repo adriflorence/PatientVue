@@ -1,26 +1,24 @@
 package com.adriforczek.PatientVue.services;
 
+import com.adriforczek.PatientVue.entities.FHIRData;
+import com.adriforczek.PatientVue.entities.Medication;
 import com.adriforczek.PatientVue.entities.ObservationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 
 @Component
-public class ObservationService {
+public class MedicationService {
 
     @Autowired
     RestTemplate restTemplate;
 
-    public ObservationResponse getObservationData(String userId, String token){
-        String url = "https://www.patientview.org/api/user/{userId}/observations?" +
-             "code=Urea&" +
-             "code=creatinine&" +
-             "code=potassium&" +
-             "code=Weight&" +
-             "code=tacrolimus&" +
-             "&limit=10&offset=0&orderDirection=DESC?";
+    public List<Medication> getMedications(String userId, String token){
+        String url = "https://www.patientview.org/api/user/{userId}/medications";
 
         // create headers
         HttpHeaders headers = new HttpHeaders();
@@ -30,16 +28,16 @@ public class ObservationService {
         // build request
         HttpEntity request = new HttpEntity(headers);
 
-        ResponseEntity<ObservationResponse> response = restTemplate.exchange(
+        ResponseEntity<List<Medication>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 request,
-                ObservationResponse.class,
+                new ParameterizedTypeReference<List<Medication>>() {},
                 userId
         );
 
-        System.out.println(response.getBody());
-        ObservationResponse res = response.getBody();
-        return res;
+        List<Medication> medications = response.getBody();
+        return medications;
     }
+
 }

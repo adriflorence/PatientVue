@@ -67,8 +67,7 @@ public class UserService {
                 userId
         );
 
-        List<FHIRData> clinicalData =  response.getBody();
-        System.out.println(response.getBody().get(0).getFhirConditions());
+        List<FHIRData> clinicalData = response.getBody();
         return clinicalData;
     }
 
