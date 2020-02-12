@@ -13,7 +13,10 @@
                 </div>
                 <Personal :personalDetails="personalDetails"/>
                 <div class="medications box">
-                    <Medication/>
+                    <p class="title"> Medications</p>
+                    <Medication v-for="medication in medications"
+                                :key="medication.name"
+                                :medication="medication"/>
                 </div>
                 <div class="box">
                     <p class="title">Results</p>
@@ -56,21 +59,23 @@
                 personalDetails: null,
                 recentObservations: null,
                 observations: [],
+                medications: []
             }
         },
         created(){
             this.SERVER_URL = "http://localhost:8080";
+            this.instance = axios.create({
+                baseURL: this.SERVER_URL,
+                timeout: 10000
+            });
 
             this.loadBasicInfo();
             this.loadObservations();
+            this.loadMedications();
         },
         methods:{
             loadBasicInfo(){
-                const instance = axios.create({
-                  baseURL: this.SERVER_URL,
-                  timeout: 10000
-                });
-                instance.get(this.SERVER_URL + `/basicuserinformation`)
+                this.instance.get(this.SERVER_URL + `/basicuserinformation`)
                     .then(response => {
                         this.personalDetails = response.data;
                     })
@@ -79,15 +84,20 @@
                     });
             },
             loadObservations(){
-                const instance = axios.create({
-                  baseURL: this.SERVER_URL,
-                  timeout: 10000
-                });
-                instance.get(this.SERVER_URL + `/patient/${this.userId}/observations`)
+                this.instance.get(this.SERVER_URL + `/patient/${this.userId}/observations`)
                     .then(response => {
-                        this.observations = response.data.data;
-
-                        this.recentObservations = this.observations[Object.keys(this.observations)[0]];
+                        this.observations = response;
+                    })
+                    .catch(error => {
+                        window.console.log(error);
+                    });
+            },
+            loadMedications(){
+                this.instance.get(this.SERVER_URL + `/patient/${this.userId}/medications`)
+                    .then(response => {
+                        this.medications = response.data.filter(med => {
+                            return med.group.id === 117;
+                        });
                     })
                     .catch(error => {
                         window.console.log(error);
