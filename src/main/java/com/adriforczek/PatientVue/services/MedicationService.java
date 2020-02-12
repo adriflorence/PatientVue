@@ -1,8 +1,6 @@
 package com.adriforczek.PatientVue.services;
 
-import com.adriforczek.PatientVue.entities.FHIRData;
 import com.adriforczek.PatientVue.entities.Medication;
-import com.adriforczek.PatientVue.entities.ObservationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -18,7 +16,7 @@ public class MedicationService {
     RestTemplate restTemplate;
 
     public List<Medication> getMedications(String userId, String token){
-        String url = "https://www.patientview.org/api/user/{userId}/medications";
+        String url = "https://www.patientview.org/api/user/46134987/medication";
 
         // create headers
         HttpHeaders headers = new HttpHeaders();
@@ -32,7 +30,8 @@ public class MedicationService {
                 url,
                 HttpMethod.GET,
                 request,
-                new ParameterizedTypeReference<List<Medication>>() {},
+                new ParameterizedTypeReference<List<Medication>>() {
+                },
                 userId
         );
 

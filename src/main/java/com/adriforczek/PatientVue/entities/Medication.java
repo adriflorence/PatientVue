@@ -1,17 +1,19 @@
 package com.adriforczek.PatientVue.entities;
 
+import java.util.Date;
+
 public class Medication {
 
-    private String startDate;
+    private Date startDate;
     private String name;
     private String dose;
     private Group group;
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
