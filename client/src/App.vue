@@ -12,6 +12,9 @@
                     </article>
                 </div>
                 <Personal :personalDetails="personalDetails"/>
+                <div class="medications box">
+                    <Medication/>
+                </div>
                 <div class="box">
                     <p class="title">Results</p>
                     <Observation v-if="recentObservations && recentObservations.CREATININE"
@@ -35,6 +38,7 @@
 <script>
     import axios from 'axios';
     import Personal from './components/Personal.vue';
+    import Medication from './components/Medication.vue';
     import Observation from './components/Observation.vue';
     import Credentials from './config/Credentials.json';
     import Footer from './components/Footer.vue';
@@ -43,6 +47,7 @@
         name: 'app',
         components: {
             Personal,
+            Medication,
             Observation,
             Footer
         },
@@ -54,17 +59,18 @@
             }
         },
         created(){
+            this.SERVER_URL = "http://localhost:8080";
+
             this.loadBasicInfo();
             this.loadObservations();
         },
         methods:{
             loadBasicInfo(){
-                const SERVER_URL = 'http://localhost:8080';
                 const instance = axios.create({
-                  baseURL: SERVER_URL,
+                  baseURL: this.SERVER_URL,
                   timeout: 10000
                 });
-                instance.get(SERVER_URL + `/basicuserinformation`)
+                instance.get(this.SERVER_URL + `/basicuserinformation`)
                     .then(response => {
                         this.personalDetails = response.data;
                     })
@@ -73,12 +79,11 @@
                     });
             },
             loadObservations(){
-                const SERVER_URL = 'http://localhost:8080';
                 const instance = axios.create({
-                  baseURL: SERVER_URL,
+                  baseURL: this.SERVER_URL,
                   timeout: 10000
                 });
-                instance.get(SERVER_URL + `/patient/${this.userId}/observations`)
+                instance.get(this.SERVER_URL + `/patient/${this.userId}/observations`)
                     .then(response => {
                         this.observations = response.data.data;
 
